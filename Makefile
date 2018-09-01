@@ -1,2 +1,2 @@
 build:
-	GOPATH=$(shell pwd) go build -o bin/flash-logger ./src/cmd/main
+	GOPATH=$(shell pwd) go build -o bin/flash-logger flash-logger/cmd/main

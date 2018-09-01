@@ -14,5 +14,5 @@ func New() *Handler {
 }
 
 func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
-	json.Reply(resp, true, http.StatusOK)
+	json.Reply(resp, response{Result: true}, http.StatusOK)
 }
