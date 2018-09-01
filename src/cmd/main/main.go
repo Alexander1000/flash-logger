@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"time"
 	"fmt"
+
+	"flash-logger/api/v1/event"
 )
 
 func main() {
@@ -12,6 +14,8 @@ func main() {
 	handler := http.HandlerFunc(func (resp http.ResponseWriter, req *http.Request) {
 		// nothing
 	})
+
+	http.Handle("/event", event.New())
 
 	s := &http.Server{
 		Addr: ":42234",
