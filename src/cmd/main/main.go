@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	fmt.Println("Starting application ...")
+
 	handler := http.HandlerFunc(func (resp http.ResponseWriter, req *http.Request) {
 		// nothing
 	})
