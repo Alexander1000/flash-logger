@@ -1,6 +1,10 @@
 {
   "type": "object",
   "properties": {
+    "key": {
+      "type": "string",
+      "description": "ключ приложения"
+    },
     "level": {
       "type": "string"
     },
@@ -17,6 +21,6 @@
       }
     }
   },
-  "required": ["level", "message"],
+  "required": ["key", "level", "message"],
   "additionalProperties": false
 }
