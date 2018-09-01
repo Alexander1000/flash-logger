@@ -21,8 +21,8 @@ func main() {
 
 	err := s.ListenAndServe()
 	if err != nil {
-		fmt.Sprintf("error in start application: %v", err)
+		fmt.Printf("error in start application: %v", err)
 	}
 
-	fmt.Sprintf("application terminated")
+	fmt.Printf("application terminated")
 }
