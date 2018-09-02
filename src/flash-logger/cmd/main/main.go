@@ -5,15 +5,20 @@ import (
 	"log"
 
 	"flash-logger/api/v1/event"
+	"flash-logger/api/v1/logs"
 	"flash-logger/storage/memory"
 )
 
 func main() {
 	log.Println("Starting application ...")
 
-	// @todo загрузка ключей авторизации
+	// @todo загрузка ключей для валидации авторизаций (Bearer)
 
-	http.Handle("/event", event.New(memory.New()))
+	storage := memory.New()
+
+	http.Handle("/1/event", event.New(storage))
+
+	http.Handle("/1/logs", logs.New(storage))
 
 	if err := http.ListenAndServe(":42234", nil); err != nil {
 		log.Fatalf("error in start application: %v", err)
