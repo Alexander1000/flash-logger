@@ -20,6 +20,7 @@ func main() {
 
 	http.Handle("/1/logs", logs.New(storage))
 
+	// @todo параметризовать порт запуска
 	if err := http.ListenAndServe(":42234", nil); err != nil {
 		log.Fatalf("error in start application: %v", err)
 	}
