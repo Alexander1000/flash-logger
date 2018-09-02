@@ -2,6 +2,7 @@ package memory
 
 type Storage struct {
 	projects []Project
+	tuples []Tuple
 }
 
 func New() *Storage {
@@ -11,5 +12,6 @@ func New() *Storage {
 
 	return &Storage{
 		projects: projects,
+		tuples: make([]Tuple, 0, 100),
 	}
 }
