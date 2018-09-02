@@ -1,5 +1,5 @@
 package storage
 
 type Repository interface {
-	SaveMessage(level string, message string, context interface{}, tags []string) error
+	SaveMessage(projectID int, level int, message string, context interface{}, tags []string) error
 }
