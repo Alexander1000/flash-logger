@@ -4,7 +4,7 @@ import (
 	"flash-logger/model"
 )
 
-func (s *Storage) GetLastMessages(projectID int, limit int, offset int) []model.Message {
+func (s *Storage) GetMessages(projectID int, limit int, offset int) []model.Message {
 	messages := make([]model.Message, 0, limit)
 	count := 0
 	for _, tuple := range s.tuples {

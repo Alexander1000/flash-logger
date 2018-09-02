@@ -46,6 +46,6 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	// @todo забирать из входных параметров
-	messages := h.storage.GetLastMessages(1, requestData.Limit, requestData.Offset)
+	messages := h.storage.GetMessages(1, requestData.Limit, requestData.Offset)
 	jsonResponse.Reply(resp, response{Result: messages}, http.StatusOK)
 }
