@@ -1,9 +1,9 @@
 package model
 
 type Message struct {
-	ID int
-	Level int
-	Message string
-	Context interface{}
-	Tags []string
+	ID int `json:"id"`
+	Level int `json:"level"`
+	Message string `json:"message"`
+	Context interface{} `json:"context"`
+	Tags []string `json:"tags"`
 }

@@ -1,5 +1,9 @@
 package logs
 
+import (
+	"flash-logger/model"
+)
+
 type response struct {
-	Result bool `json:"result"`
+	Result []model.Message `json:"result"`
 }

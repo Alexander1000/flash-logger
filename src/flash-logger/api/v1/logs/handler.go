@@ -19,5 +19,7 @@ func New(storage storage.Repository) *Handler {
 
 func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	defer req.Body.Close()
-	jsonResponse.Reply(resp, response{Result: true}, http.StatusOK)
+	// @todo забирать из входных параметров
+	messages := h.storage.GetLastMessages(1, 20, 0)
+	jsonResponse.Reply(resp, response{Result: messages}, http.StatusOK)
 }
