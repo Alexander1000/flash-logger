@@ -20,6 +20,8 @@ func New(storage storage.Repository) *Handler {
 }
 
 func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
+	defer req.Body.Close()
+
 	if req.Method != "POST" {
 		jsonResponse.Reply(resp, jsonResponse.ErrorNotAllowed, http.StatusMethodNotAllowed)
 		return
