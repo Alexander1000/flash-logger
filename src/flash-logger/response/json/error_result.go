@@ -19,4 +19,11 @@ var (
 			Code: http.StatusMethodNotAllowed,
 		},
 	}
+
+	ErrorInternalServerError = ErrorResult{
+		Error: ErrorData{
+			Message: "Internal server error",
+			Code: http.StatusInternalServerError,
+		},
+	}
 )
