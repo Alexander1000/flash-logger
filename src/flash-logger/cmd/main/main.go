@@ -11,11 +11,13 @@ import (
 func main() {
 	log.Println("Starting application ...")
 
+	// @todo загрузка ключей авторизации
+
 	http.Handle("/event", event.New(memory.New()))
 
 	if err := http.ListenAndServe(":42234", nil); err != nil {
 		log.Fatalf("error in start application: %v", err)
 	}
 
-	log.Printf("application terminated")
+	log.Println("application terminated")
 }
