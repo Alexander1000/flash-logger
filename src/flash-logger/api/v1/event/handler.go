@@ -6,13 +6,17 @@ import (
 	"io/ioutil"
 
 	jsonResponse "flash-logger/response/json"
+	"flash-logger/storage"
 )
 
 type Handler struct {
+	storage storage.Repository
 }
 
-func New() *Handler {
-	return &Handler{}
+func New(storage storage.Repository) *Handler {
+	return &Handler{
+		storage: storage,
+	}
 }
 
 func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
