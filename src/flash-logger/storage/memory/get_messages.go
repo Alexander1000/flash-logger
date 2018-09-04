@@ -7,7 +7,17 @@ import (
 func (s *Storage) GetMessages(projectID int, limit int, offset int) []model.Message {
 	messages := make([]model.Message, 0, limit)
 	count := 0
-	for _, tuple := range s.tuples {
+
+	var tuples []Tuple
+	if len(s.tuples) >= offset + limit {
+		tuples = s.tuples[offset : offset + limit]
+	} else if len(s.tuples) > offset {
+		tuples = s.tuples[offset:]
+	} else {
+		tuples = make([]Tuple, 0, 0)
+	}
+
+	for _, tuple := range tuples {
 		if projectID == tuple.ProjectID {
 			count++
 			messages = append(
