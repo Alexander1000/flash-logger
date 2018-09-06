@@ -33,6 +33,11 @@ func main() {
 	}
 
 	log.Printf("Config file: %s", *configPath)
+
+	for _, project := range cfg.Projects {
+		log.Printf("Registered project '%s'", project.Title)
+	}
+
 	log.Printf("Starting service on port: %d", cfg.Port)
 
 	// @todo загрузка ключей для валидации авторизаций (Bearer)
