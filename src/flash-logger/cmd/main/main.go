@@ -8,6 +8,7 @@ import (
 	"flash-logger/api/v1/event"
 	"flash-logger/api/v1/logs"
 	"flash-logger/storage/memory"
+	"flash-logger/config"
 )
 
 func main() {
@@ -21,7 +22,14 @@ func main() {
 		log.Fatalf("unknown config file")
 	}
 
+	var err error
+	var cfg *config.Config
+	if cfg, err = config.LoadFromFile(*configPath); err != nil {
+		log.Fatalf("error in load config from file: %v", err)
+	}
+
 	log.Printf("Config file: %s", *configPath)
+	log.Printf("Starting service on port: %d", cfg.Port)
 
 	// @todo загрузка ключей для валидации авторизаций (Bearer)
 
