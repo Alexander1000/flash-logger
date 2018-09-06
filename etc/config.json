@@ -1,3 +1,4 @@
 {
-  "port": 42234
+  "port": 42234,
+  "projectList": "projects.yml"
 }

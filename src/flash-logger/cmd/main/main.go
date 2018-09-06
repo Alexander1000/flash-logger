@@ -28,6 +28,10 @@ func main() {
 		log.Fatalf("error in load config from file: %v", err)
 	}
 
+	if err := cfg.LoadProjects(); err != nil {
+		log.Fatalf("error in load projects: %v", err)
+	}
+
 	log.Printf("Config file: %s", *configPath)
 	log.Printf("Starting service on port: %d", cfg.Port)
 
