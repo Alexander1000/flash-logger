@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"log"
+	"flag"
 
 	"flash-logger/api/v1/event"
 	"flash-logger/api/v1/logs"
@@ -11,6 +12,16 @@ import (
 
 func main() {
 	log.Println("Starting application ...")
+
+	configPath := flag.String("c", "", "config file")
+
+	flag.Parse()
+
+	if len(*configPath) == 0 {
+		log.Fatalf("unknown config file")
+	}
+
+	log.Printf("Config file: %s", *configPath)
 
 	// @todo загрузка ключей для валидации авторизаций (Bearer)
 
