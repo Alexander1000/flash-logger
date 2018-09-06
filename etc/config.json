@@ -1,4 +1,4 @@
 {
   "port": 42234,
-  "projectList": "projects.yml"
+  "projectList": "etc/projects.yml"
 }
