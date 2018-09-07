@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"log"
 	"flag"
+	"fmt"
 
 	"flash-logger/api/v1/event"
 	"flash-logger/storage/memory"
@@ -41,16 +42,13 @@ func main() {
 
 	log.Printf("Starting service on port: %d", cfg.Port)
 
-	// @todo загрузка ключей для валидации авторизаций (Bearer)
-
 	storage := memory.New()
 
 	http.Handle("/1/event", auth.NewAuthHandler(event.New(storage), cfg.Projects))
 
 	http.Handle("/1/logs", auth.NewAuthHandler(logs.New(storage), cfg.Projects))
 
-	// @todo параметризовать порт запуска
-	if err := http.ListenAndServe(":42234", nil); err != nil {
+	if err := http.ListenAndServe(fmt.Sprintf(":%d", cfg.Port), nil); err != nil {
 		log.Fatalf("error in start application: %v", err)
 	}
 
