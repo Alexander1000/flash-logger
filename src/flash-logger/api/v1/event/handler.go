@@ -27,7 +27,7 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// @todo добавить validator, добавить авторизацию по заголовку Bearer
+	// @todo добавить validator
 
 	logData := request{}
 	if reqData, err := ioutil.ReadAll(req.Body); err != nil {

@@ -1,1 +1,2 @@
 1. Добавить валидатор json request/response
+2. конвертировать строку в число fatal -> 0, error -> 1, etc
