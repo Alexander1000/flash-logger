@@ -27,6 +27,11 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	if len(authHeader) < 10 {
+		json.Reply(resp, json.ErrorNotImplemented, http.StatusNotImplemented)
+		return
+	}
+
 	// Authorization: Bearer <token>
 	if authType := authHeader[0:7]; authType != "Bearer " {
 		json.Reply(resp, json.ErrorNotImplemented, http.StatusNotImplemented)
