@@ -38,5 +38,19 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	token := authHeader[7:]
+	found := false
+	for _, project := range h.projects {
+		if project.Token == token {
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		json.Reply(resp, json.ErrorForbidden, http.StatusForbidden)
+		return
+	}
+
 	h.fallback.ServeHTTP(resp, req)
 }

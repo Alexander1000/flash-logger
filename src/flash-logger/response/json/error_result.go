@@ -19,6 +19,13 @@ var (
 			Code: http.StatusUnauthorized,
 		},
 	}
+	// ErrorForbidden
+	ErrorForbidden = ErrorResult{
+		Error: ErrorData{
+			Message: "Forbidden",
+			Code: http.StatusForbidden,
+		},
+	}
 	// ErrorNotAllowed
 	ErrorNotAllowed = ErrorResult{
 		Error: ErrorData{
@@ -33,6 +40,7 @@ var (
 			Code: http.StatusInternalServerError,
 		},
 	}
+	// ErrorNotImplemented
 	ErrorNotImplemented = ErrorResult{
 		Error: ErrorData{
 			Message: "Not implemented",
