@@ -6,9 +6,10 @@ import (
 	"flag"
 
 	"flash-logger/api/v1/event"
-	"flash-logger/api/v1/logs"
 	"flash-logger/storage/memory"
 	"flash-logger/config"
+	"flash-logger/handlers/auth"
+	"flash-logger/api/v1/logs"
 )
 
 func main() {
@@ -44,9 +45,9 @@ func main() {
 
 	storage := memory.New()
 
-	http.Handle("/1/event", event.New(storage))
+	http.Handle("/1/event", auth.NewAuthHandler(event.New(storage)))
 
-	http.Handle("/1/logs", logs.New(storage))
+	http.Handle("/1/logs", auth.NewAuthHandler(logs.New(storage)))
 
 	// @todo параметризовать порт запуска
 	if err := http.ListenAndServe(":42234", nil); err != nil {
