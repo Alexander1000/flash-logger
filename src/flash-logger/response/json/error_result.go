@@ -12,6 +12,13 @@ type ErrorData struct {
 }
 
 var (
+	// ErrorUnauthorized
+	ErrorUnauthorized = ErrorResult{
+		Error: ErrorData{
+			Message: "Not authorized",
+			Code: http.StatusUnauthorized,
+		},
+	}
 	// ErrorNotAllowed
 	ErrorNotAllowed = ErrorResult{
 		Error: ErrorData{
@@ -19,7 +26,7 @@ var (
 			Code: http.StatusMethodNotAllowed,
 		},
 	}
-
+	// ErrorInternalServerError
 	ErrorInternalServerError = ErrorResult{
 		Error: ErrorData{
 			Message: "Internal server error",
