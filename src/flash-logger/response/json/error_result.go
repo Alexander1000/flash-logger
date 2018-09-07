@@ -15,7 +15,7 @@ var (
 	// ErrorUnauthorized
 	ErrorUnauthorized = ErrorResult{
 		Error: ErrorData{
-			Message: "Not authorized",
+			Message: "Unauthorized",
 			Code: http.StatusUnauthorized,
 		},
 	}
@@ -31,6 +31,12 @@ var (
 		Error: ErrorData{
 			Message: "Internal server error",
 			Code: http.StatusInternalServerError,
+		},
+	}
+	ErrorNotImplemented = ErrorResult{
+		Error: ErrorData{
+			Message: "Not implemented",
+			Code: http.StatusNotImplemented,
 		},
 	}
 )

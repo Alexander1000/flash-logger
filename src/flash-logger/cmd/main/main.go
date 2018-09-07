@@ -45,9 +45,9 @@ func main() {
 
 	storage := memory.New()
 
-	http.Handle("/1/event", auth.NewAuthHandler(event.New(storage)))
+	http.Handle("/1/event", auth.NewAuthHandler(event.New(storage), cfg.Projects))
 
-	http.Handle("/1/logs", auth.NewAuthHandler(logs.New(storage)))
+	http.Handle("/1/logs", auth.NewAuthHandler(logs.New(storage), cfg.Projects))
 
 	// @todo параметризовать порт запуска
 	if err := http.ListenAndServe(":42234", nil); err != nil {

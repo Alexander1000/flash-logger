@@ -4,14 +4,19 @@ import (
 	"net/http"
 
 	"flash-logger/response/json"
+	"flash-logger/config"
 )
 
 type Handler struct {
 	fallback http.Handler
+	projects []config.Project
 }
 
-func NewAuthHandler(fallback http.Handler) http.Handler {
-	return &Handler{fallback:fallback}
+func NewAuthHandler(fallback http.Handler, projects []config.Project) http.Handler {
+	return &Handler{
+		fallback:fallback,
+		projects: projects,
+	}
 }
 
 func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
@@ -21,5 +26,12 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		json.Reply(resp, json.ErrorUnauthorized, http.StatusUnauthorized)
 		return
 	}
+
+	// Authorization: Bearer <token>
+	if authType := authHeader[0:7]; authType != "Bearer " {
+		json.Reply(resp, json.ErrorNotImplemented, http.StatusNotImplemented)
+		return
+	}
+
 	h.fallback.ServeHTTP(resp, req)
 }
