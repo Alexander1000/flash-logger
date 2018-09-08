@@ -7,10 +7,11 @@ import (
 	"net/http/httptest"
 
 	"flash-logger/storage/memory"
+	"flash-logger/config"
 )
 
 func TestHandler_GetRequest_MethodNotAllowed(t *testing.T) {
-	handler := New(memory.New())
+	handler := New(memory.New(make([]config.Project, 0, 0)))
 	req, err := http.NewRequest("GET", "/1/events", bytes.NewBuffer([]byte(`{}`)))
 	if err != nil {
 		t.Fatalf("Request build error: %v.", err)

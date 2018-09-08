@@ -42,7 +42,7 @@ func main() {
 
 	log.Printf("Starting service on port: %d", cfg.Port)
 
-	storage := memory.New()
+	storage := memory.New(cfg.Projects)
 
 	http.Handle("/1/event", auth.NewAuthHandler(event.New(storage), cfg.Projects))
 

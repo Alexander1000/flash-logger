@@ -1,16 +1,14 @@
 package memory
 
+import "flash-logger/config"
+
 type Storage struct {
-	projects []Project
+	projects []config.Project
 	tuples []Tuple
 	sequenceMessageID int
 }
 
-func New() *Storage {
-	// @todo доработать или загрузку из yml-файла или динамически создавать/сохранять
-	projects := make([]Project, 0, 1)
-	projects = append(projects, Project{ID: 1, Name: "demo", Key: "asdfg"})
-
+func New(projects []config.Project) *Storage {
 	return &Storage{
 		projects: projects,
 		tuples: make([]Tuple, 0, 100),
