@@ -2,6 +2,7 @@
 
 ## Added 2019-09-22
     * graceful shutdown
+    * udp протокол
 
 ## Added 2018-09-08
     * Прокидываем список проектов из yml-файла в storage

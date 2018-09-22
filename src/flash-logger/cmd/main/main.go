@@ -73,6 +73,8 @@ func main() {
 		if err != nil {
 			log.Fatalf("error in listen udp: %v", err)
 		}
+
+		log.Printf("Starting UDP service on port: %d", cfg.Port)
 		listener := udp.NewListener(conn)
 		listener.Listen()
 	}()
