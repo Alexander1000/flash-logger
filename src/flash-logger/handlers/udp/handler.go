@@ -11,7 +11,7 @@ type Handler struct {
 
 func New() *Handler {
 	return &Handler{
-		priRegular: regexp.MustCompile(`/^<\d+>/`),
+		priRegular: regexp.MustCompile(`^<\d+>`),
 	}
 }
 
@@ -21,11 +21,12 @@ func New() *Handler {
 //  97.100 Safari/537.36"
 
 func (h *Handler) Handle(buffer []byte) {
-	// parsing PRI part
-	log.Println(string(buffer[0:5]))
 	pri := h.priRegular.Find(buffer[0:5])
-	if pri != nil {
-		log.Println(string(pri))
+	if pri == nil {
+		log.Println("Not found PRI")
+		return
 	}
-	log.Println(string(buffer))
+
+	newBuffer := buffer[len(pri):]
+	log.Println(string(newBuffer))
 }
