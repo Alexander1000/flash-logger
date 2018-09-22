@@ -17,6 +17,7 @@ import (
 	"flash-logger/api/v1/logs"
 	"net"
 	"flash-logger/udp"
+	udpHandler "flash-logger/handlers/udp"
 )
 
 func main() {
@@ -75,7 +76,7 @@ func main() {
 		}
 
 		log.Printf("Starting UDP service on port: %d", cfg.Port)
-		listener := udp.NewListener(conn)
+		listener := udp.NewListener(conn, udpHandler.New())
 		listener.Listen()
 	}()
 

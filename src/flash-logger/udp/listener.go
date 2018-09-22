@@ -2,16 +2,16 @@ package udp
 
 import (
 	"net"
-	"encoding/hex"
 	"log"
 )
 
 type Listener struct {
 	conn *net.UDPConn
+	handler Handler
 }
 
-func NewListener(conn *net.UDPConn) *Listener {
-	return &Listener{conn: conn}
+func NewListener(conn *net.UDPConn, handler Handler) *Listener {
+	return &Listener{conn: conn, handler: handler}
 }
 
 func (l *Listener) Listen() {
@@ -22,9 +22,7 @@ func (l *Listener) Listen() {
 			log.Println("Error Reading")
 			return
 		} else {
-			log.Println(string(buf[0:n]))
-			log.Println(hex.EncodeToString(buf[0:n]))
-			log.Println("Package Done")
+			l.handler.Handle(buf[0:n])
 		}
 	}
 }
