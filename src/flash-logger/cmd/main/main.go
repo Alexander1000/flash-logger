@@ -5,6 +5,10 @@ import (
 	"log"
 	"flag"
 	"fmt"
+	"os"
+	"syscall"
+	"os/signal"
+	"context"
 
 	"flash-logger/api/v1/event"
 	"flash-logger/storage/memory"
@@ -15,6 +19,9 @@ import (
 
 func main() {
 	log.Println("Starting application ...")
+
+	trap := make(chan os.Signal, 1)
+	signal.Notify(trap, syscall.SIGINT, os.Interrupt, syscall.SIGTERM)
 
 	configPath := flag.String("c", "", "config file")
 
@@ -48,8 +55,24 @@ func main() {
 
 	http.Handle("/1/logs", auth.NewAuthHandler(logs.New(storage), cfg.Projects))
 
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", cfg.Port), nil); err != nil {
-		log.Fatalf("error in start application: %v", err)
+	go func() {
+		if err := http.ListenAndServe(fmt.Sprintf(":%d", cfg.Port), nil); err != nil {
+			log.Fatalf("error in start application: %v", err)
+		}
+	}()
+
+	ctx := context.Background()
+
+	err = nil
+	select {
+	case <-trap:
+		log.Println("termination signal caught")
+	case <-ctx.Done():
+		err = ctx.Err()
+	}
+
+	if err != nil {
+		log.Printf("error in caught signal: %v", err)
 	}
 
 	log.Println("application terminated")
