@@ -15,6 +15,8 @@ import (
 	"flash-logger/config"
 	"flash-logger/handlers/auth"
 	"flash-logger/api/v1/logs"
+	"net"
+	"flash-logger/udp"
 )
 
 func main() {
@@ -59,6 +61,20 @@ func main() {
 		if err := http.ListenAndServe(fmt.Sprintf(":%d", cfg.Port), nil); err != nil {
 			log.Fatalf("error in start application: %v", err)
 		}
+	}()
+
+	go func() {
+		addr, err := net.ResolveUDPAddr("udp", fmt.Sprintf(":%d", cfg.Port))
+		if err != nil {
+			log.Fatalf("error in start application via udp: %v", err)
+		}
+
+		conn, err := net.ListenUDP("udp", addr)
+		if err != nil {
+			log.Fatalf("error in listen udp: %v", err)
+		}
+		listener := udp.NewListener(conn)
+		listener.Listen()
 	}()
 
 	ctx := context.Background()
