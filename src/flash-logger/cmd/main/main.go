@@ -76,7 +76,7 @@ func main() {
 		}
 
 		log.Printf("Starting UDP service on port: %d", cfg.Port)
-		listener := udp.NewListener(conn, udpHandler.New())
+		listener := udp.NewListener(conn, udpHandler.New(storage))
 		listener.Listen()
 	}()
 

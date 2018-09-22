@@ -3,16 +3,19 @@ package udp
 import (
 	"log"
 	"regexp"
+
+	"flash-logger/storage"
 )
 
 type Handler struct {
 	priRegular *regexp.Regexp
+	storage storage.Repository
 }
 
-func New() *Handler {
+func New(storage storage.Repository) *Handler {
 	return &Handler{
 		priRegular: regexp.MustCompile(`^<\d+>`),
-
+		storage: storage,
 	}
 }
 
@@ -59,5 +62,12 @@ func (h *Handler) Handle(buffer []byte) {
 		log.Printf("Process: %s", string(process))
 	}
 	newBuffer = newBuffer[length:]
+
+	// @todo определять projectId по process
+	// @todo конвертировать PRI (facility, severity) в level
+	if err := h.storage.SaveMessage(1, 1, string(newBuffer), nil, nil); err != nil {
+		return
+	}
+
 	log.Println(string(newBuffer))
 }
