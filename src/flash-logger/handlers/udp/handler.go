@@ -12,6 +12,7 @@ type Handler struct {
 func New() *Handler {
 	return &Handler{
 		priRegular: regexp.MustCompile(`^<\d+>`),
+
 	}
 }
 
@@ -27,6 +28,36 @@ func (h *Handler) Handle(buffer []byte) {
 		return
 	}
 
-	newBuffer := buffer[len(pri):]
+	timestamp := buffer[len(pri):len(pri) + 15]
+	log.Printf("Timestamp: %s", string(timestamp))
+
+	isHost := true
+	host := make([]byte, 0, 10)
+	process := make([]byte, 0, 10)
+	newBuffer := buffer[len(pri) + len(timestamp) + 1:]
+	length := 0
+	for _, char := range newBuffer {
+		length++
+		if char == byte(':') {
+			break
+		}
+
+		if char == byte(' ') {
+			isHost = false
+			continue
+		}
+
+		if isHost {
+			host = append(host, char)
+		} else {
+			process = append(process, char)
+		}
+	}
+
+	log.Printf("Host: %s", string(host))
+	if len(process) > 0 {
+		log.Printf("Process: %s", string(process))
+	}
+	newBuffer = newBuffer[length:]
 	log.Println(string(newBuffer))
 }
