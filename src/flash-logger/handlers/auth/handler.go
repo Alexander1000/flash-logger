@@ -41,7 +41,7 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	token := authHeader[7:]
 	found := false
 	for _, project := range h.projects {
-		if project.Token == token && !project.UDP {
+		if project.Token == token {
 			found = true
 			break
 		}

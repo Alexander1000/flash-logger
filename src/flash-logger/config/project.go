@@ -5,7 +5,6 @@ type Project struct {
 	Title string `yaml:"title"`
 	Name string `yaml:"name"`
 	Token string `yaml:"token"`
-	UDP bool `yaml:"udp,omitempty"`
 }
 
 type ProjectList struct {
