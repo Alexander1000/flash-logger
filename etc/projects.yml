@@ -3,3 +3,8 @@ projects:
     name: example
     title: Example
     token: fjldf7sfSf8asLf8ss7
+
+  - id: 2
+    name: nginx
+    title: NGINX
+    token: sfoius4534j
