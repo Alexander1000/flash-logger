@@ -53,8 +53,7 @@ func (h *Handler) Handle(buffer []byte) {
 		projectID = prjByName
 	}
 
-	// @todo конвертировать PRI (facility, severity) в level
-	if err := h.storage.SaveMessage(projectID, 1, string(relp.Message), nil, nil); err != nil {
+	if err := h.storage.SaveMessage(projectID, relp.GetSeverity(), string(relp.Message), nil, nil); err != nil {
 		return
 	}
 

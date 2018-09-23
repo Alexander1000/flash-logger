@@ -7,14 +7,6 @@ import (
 	"strconv"
 )
 
-type RELP struct {
-	PRI int
-	Timestamp string
-	Host string
-	Process string
-	Message []byte
-}
-
 type RelpParser struct {
 	priRegular *regexp.Regexp
 }

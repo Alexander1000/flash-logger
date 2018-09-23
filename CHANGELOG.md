@@ -1,6 +1,9 @@
 # Changelog flash-logger
 
-## Added 2019-09-22
+## Added 2018-09-23
+    * Добавлены константы для severity уровней
+
+## Added 2018-09-22
     * graceful shutdown
     * udp протокол
     * Разбор UDP сообщения как RELP протокола
