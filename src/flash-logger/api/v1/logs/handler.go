@@ -45,7 +45,9 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		requestData.Limit = defaultLimit
 	}
 
-	// @todo забирать из входных параметров
-	messages := h.storage.GetMessages(1, requestData.Limit, requestData.Offset)
+	valProjectID := req.Context().Value("projectId")
+	projectID := valProjectID.(int)
+
+	messages := h.storage.GetMessages(projectID, requestData.Limit, requestData.Offset)
 	jsonResponse.Reply(resp, response{Result: messages}, http.StatusOK)
 }

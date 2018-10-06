@@ -38,9 +38,11 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// @todo определять projectId по key
+	valProjectID := req.Context().Value("projectId")
+	projectID := valProjectID.(int)
+
 	// @todo конвертировать строку в число fatal -> 0, error -> 1, etc
-	if err := h.storage.SaveMessage(1, 1, logData.Message, logData.Context, logData.Tags); err != nil {
+	if err := h.storage.SaveMessage(projectID, 1, logData.Message, logData.Context, logData.Tags); err != nil {
 		jsonResponse.Reply(resp, jsonResponse.ErrorInternalServerError, http.StatusInternalServerError)
 		return
 	}
