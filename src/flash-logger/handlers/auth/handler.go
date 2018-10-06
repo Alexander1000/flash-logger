@@ -5,6 +5,7 @@ import (
 
 	"flash-logger/response/json"
 	"flash-logger/config"
+	"context"
 )
 
 type Handler struct {
@@ -40,8 +41,10 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 
 	token := authHeader[7:]
 	found := false
+	projectID := 0
 	for _, project := range h.projects {
 		if project.Token == token {
+			projectID = project.ID
 			found = true
 			break
 		}
@@ -52,5 +55,6 @@ func (h *Handler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	h.fallback.ServeHTTP(resp, req)
+	ctx := context.WithValue(req.Context(), "projectId", projectID)
+	h.fallback.ServeHTTP(resp, req.WithContext(ctx))
 }
