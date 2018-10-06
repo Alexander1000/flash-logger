@@ -1,5 +1,8 @@
 # Changelog flash-logger
 
+## Added 2018-10-06
+    * Обновлен TODO
+
 ## Added 2018-09-23
     * Добавлены константы для severity уровней
 
