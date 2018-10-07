@@ -28,6 +28,7 @@ func (s *Storage) GetMessages(projectID int, limit int, offset int) []model.Mess
 					Message: tuple.Message.Message,
 					Context: tuple.Message.Context,
 					Tags: tuple.Message.Tags,
+					Timestamp: tuple.Message.Timestamp,
 				},
 			)
 		}
