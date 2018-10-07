@@ -6,4 +6,5 @@ type Message struct {
 	Message string
 	Context interface{}
 	Tags []string
+	Timestamp int64
 }

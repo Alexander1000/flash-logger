@@ -1,5 +1,7 @@
 package memory
 
+import "time"
+
 func (s *Storage) SaveMessage(projectID int, level int, message string, context interface{}, tags []string) error {
 	s.sequenceMessageID++
 	sequenceID := s.sequenceMessageID
@@ -9,6 +11,7 @@ func (s *Storage) SaveMessage(projectID int, level int, message string, context 
 		Message: message,
 		Context: context,
 		Tags: tags,
+		Timestamp: time.Now().Unix(),
 	}
 	tuple := Tuple{
 		ProjectID: projectID,

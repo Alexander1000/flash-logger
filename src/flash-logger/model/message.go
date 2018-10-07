@@ -6,4 +6,5 @@ type Message struct {
 	Message string `json:"message"`
 	Context interface{} `json:"context"`
 	Tags []string `json:"tags"`
+	Timestamp int64 `json:"timestamp"`
 }
