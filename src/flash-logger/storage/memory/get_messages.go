@@ -17,6 +17,8 @@ func (s *Storage) GetMessages(projectID int, limit int, offset int) []model.Mess
 		tuples = make([]Tuple, 0, 0)
 	}
 
+	// @fixme не правильно работает limit/offset + фильтр по projectID
+
 	for _, tuple := range tuples {
 		if projectID == tuple.ProjectID {
 			count++
